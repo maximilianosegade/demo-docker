@@ -10,3 +10,14 @@ Para facilitar las pruebas, se puede ejecutar el script [docker_run.sh](https://
 * Compilar el codigo y generar el JAR de la aplicacion.
 * Hacer el build de la imagen de docker.
 * Ejecutar un container con dicha imagen, que escucha en el puerto 8080, y persiste en una DB in-memory H2.
+
+### Test
+
+#### Agregar cliente
+```bash
+curl -X POST "http://localhost:8080/customers" -H "Content-Type: application/json" -d '{"firstName": "Lionel", "lastName": "Messi"}'
+```
+#### Consultar clientes
+```bash
+curl http://localhost:8080/customers
+```
