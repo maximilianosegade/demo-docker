@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  # The Spring Boot App
+  demo-app:
+    image: demo-app
+    restart: always
+    ports: 
+      - 8080:8080
+    environment: 
+      - spring.datasource.url=jdbc:postgresql://db:5432/postgres
+      - spring.datasource.driverClassName=org.postgresql.Driver
+      - spring.datasource.username=postgres
+      - spring.datasource.password=password
+      - spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+  # Postgres DB
+  db:
+    image: postgres:12.2-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes: 
+      - ./demo-db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
